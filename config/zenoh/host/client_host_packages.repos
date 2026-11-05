@@ -2,50 +2,51 @@ repositories:
   eProsima/Micro-CDR:
     type: git
     url: https://github.com/eProsima/Micro-CDR.git
-    version: ros2
+    version: v2.0.2
 
 # MicroROS
 
+  # TEMPORARY: switch back to ros2/rclc once it has a lyrical branch
   uros/rclc:
     type: git
-    url: https://github.com/ros2/rclc.git
-    version: master
+    url: https://github.com/eProsima/rclc.git
+    version: lyrical
   uros/micro_ros_msgs:
     type: git
     url: https://github.com/micro-ROS/micro_ros_msgs.git
-    version: jazzy
+    version: lyrical
   uros/rosidl_typesupport_microxrcedds:
     type: git
     url: https://github.com/micro-ROS/rosidl_typesupport_microxrcedds.git
-    version: jazzy
+    version: lyrical
   uros/micro_ros_utilities:
     type: git
     url: https://github.com/micro-ROS/micro_ros_utilities
-    version: jazzy
+    version: lyrical
 
 # Required messages packages
 
   ros2/common_interfaces:
     type: git
     url: https://github.com/ros2/common_interfaces
-    version: jazzy
+    version: lyrical
 
   ros2/example_interfaces:
     type: git
     url: https://github.com/ros2/example_interfaces
-    version: jazzy
+    version: lyrical
 
   ros2/rcl_interfaces:
     type: git
     url: https://github.com/ros2/rcl_interfaces
-    version: jazzy
+    version: lyrical
 
   ros2/unique_identifier_msgs:
     type: git
     url: https://github.com/ros2/unique_identifier_msgs
-    version: jazzy
+    version: lyrical
 
   ros2/test_interface_files:
     type: git
     url: https://github.com/ros2/test_interface_files
-    version: jazzy
+    version: lyrical

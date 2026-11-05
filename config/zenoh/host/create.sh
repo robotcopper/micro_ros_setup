@@ -15,7 +15,7 @@ touch src/uros/rclc/rclc_lifecycle/COLCON_IGNORE
 
 # get rmw_zenoh_pico repository from git or local strage
 if [ ! -v RMW_ZENOH_PICO_PATH ] ; then
-    git clone https://github.com/esol-community/rmw_zenoh_pico -b main src/uros/rmw_zenoh_pico
+    git clone https://github.com/robotcopper/rmw_zenoh_pico -b lyrical src/uros/rmw_zenoh_pico
 else
     cp -a $RMW_ZENOH_PICO_PATH src/uros/rmw_zenoh_pico
 fi
@@ -26,7 +26,7 @@ cp -a src/uros/rmw_zenoh_pico/examples/microros/host/* src/uros/rmw_zenoh_pico/r
 
 # get zenoh_pico repository from git or local strage
 if [ ! -v ZENOH_PICO_PATH ] ; then
-    git clone https://github.com/eclipse-zenoh/zenoh-pico.git -b 1.4.0 src/uros/zenohpico
+    git clone https://github.com/eclipse-zenoh/zenoh-pico.git -b 1.10.1 src/uros/zenohpico
 else
     cp -a $ZENOH_PICO_PATH src/uros/zenohpico
 fi
