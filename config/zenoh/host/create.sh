@@ -33,14 +33,16 @@ fi
 
 # local patches (2025.05.25)
 if [ -d src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/zenohpico ] && [ ! -v ZENOH_PICO_PATH ] ; then
-    echo apply patch for zenohpico
-    git apply --directory=src/uros/zenohpico \
-	src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/zenohpico/* || true
+    for p in src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/zenohpico/* ; do
+        echo apply $p
+        git -C src/uros/zenohpico apply "$PWD/$p"
+    done
 fi
 
 if [ -d src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/rosidl_typesupport_microxrcedds ] ; then
-    echo apply patch for rosidl_typesupport_microxrcedds
-    git apply --directory=src/uros/rosidl_typesupport_microxrcedds \
-	src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/rosidl_typesupport_microxrcedds/* || true
+    for p in src/uros/rmw_zenoh_pico/patches/${ROS_DISTRO}/rosidl_typesupport_microxrcedds/* ; do
+        echo apply $p
+        git -C src/uros/rosidl_typesupport_microxrcedds apply "$PWD/$p"
+    done
     touch src/uros/rosidl_typesupport_microxrcedds/test/COLCON_IGNORE
 fi
