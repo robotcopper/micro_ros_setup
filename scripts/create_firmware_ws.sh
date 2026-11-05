@@ -45,6 +45,12 @@ else
     PLATFORM=generic
 fi
 
+if [ $# -ge 3 ]; then
+    OPTION=$3
+else
+    OPTION=""
+fi
+
 # Checking if firmware exists
 if [ -d $FW_TARGETDIR ]; then
     echo "Firmware already created. Please delete $FW_TARGETDIR folder if you want a fresh installation."
@@ -86,14 +92,15 @@ pushd $FW_TARGETDIR >/dev/null
     # Creating dev directory
     mkdir $DEV_WS_DIR
 
-    if [ $RTOS != "host" ]; then
+    if [ "$RTOS" != "host" ] && [ "$PLATFORM" != "host" ] ; then
         ros2 run micro_ros_setup create_ws.sh $DEV_WS_DIR $PREFIX/config/$RTOS/dev_ros2_packages.txt \
             $PREFIX/config/$RTOS/dev_uros_packages.repos
         rosdep install --os=ubuntu:noble -y --from-paths $DEV_WS_DIR -i $DEV_WS_DIR --rosdistro $ROS_DISTRO --skip-keys="$SKIP"
 
          # Creating mcu directory
         mkdir mcu_ws
-        ros2 run micro_ros_setup create_ws.sh mcu_ws $PREFIX/config/client_ros2_packages.txt $PREFIX/config/$RTOS/$TARGET_FOLDER/client_uros_packages.repos
+        ros2 run micro_ros_setup create_ws.sh mcu_ws $PREFIX/config/client_ros2_packages.txt \
+	     $PREFIX/config/$RTOS/$TARGET_FOLDER/client_uros_packages.repos
         cp $PREFIX/config/$RTOS/$TARGET_FOLDER/client-colcon.meta mcu_ws/colcon.meta || :
 
         # TEMPORARY: pin ros2/rosidl to the last commit before ros2/rosidl#942, which made
@@ -106,7 +113,7 @@ popd >/dev/null
 
 # build the dev_ws
 . $(dirname $0)/clean_env.sh
-if [ $RTOS != "host" ]; then
+if [ "$RTOS" != "host" ] && [ "$PLATFORM" != "host" ] ; then
     pushd $FW_TARGETDIR/$DEV_WS_DIR >/dev/null
         # Fix failing build by ignoring rmw_test_fixture_implementation.
         touch ros2/ament_cmake_ros/rmw_test_fixture_implementation/COLCON_IGNORE

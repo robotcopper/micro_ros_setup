@@ -60,7 +60,7 @@ fi
 . $(dirname $0)/clean_env.sh
 
 # source dev_ws
-if [ $RTOS != "host" ]; then
+if [ "$RTOS" != "host" ] && [ "$PLATFORM" != "host" ] ; then
     set +o nounset
     . $FW_TARGETDIR/dev_ws/install/setup.bash
     set -o nounset
@@ -77,7 +77,7 @@ else
 fi
 
 ######## Fix include paths  ########
-if [ "$RTOS" != "host" ]; then
+if [ "$RTOS" != "host" ] && [ "$PLATFORM" != "host" ] ; then
     cd "$FW_TARGETDIR/mcu_ws"
     INCLUDE_ROS2_PACKAGES=$(colcon list | awk '{print $1}' | awk -v d=" " '{s=(NR==1?s:s d)$0}END{print s}')
 
